@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.tanish.todoapp.databinding.ActivitySignInBinding
 
 class SIgnInActivity : AppCompatActivity() {
@@ -13,6 +14,17 @@ class SIgnInActivity : AppCompatActivity() {
     }
 
     private lateinit var auth: FirebaseAuth
+
+    override fun onStart() {
+        super.onStart()
+
+        val currentUser: FirebaseUser? = auth.currentUser
+        if (currentUser != null){
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
